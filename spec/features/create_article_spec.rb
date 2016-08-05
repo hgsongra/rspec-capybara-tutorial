@@ -8,6 +8,5 @@ RSpec.feature "Create article" do
 		fill_in "Body", with: "Whatever it is"
 		click_button "Create Article"
 		expect(page).to have_content("Article was successfully created.")
-		
 	end	
 end
