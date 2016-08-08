@@ -1,4 +1,4 @@
-# RSpect and Capybara Tutorial
+# RSpec and Capybara Tutorial
 
 Build Rails app and test your app using RSpect and Capybara.
 

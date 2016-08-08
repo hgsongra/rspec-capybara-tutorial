@@ -1,30 +1,30 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Articles</h1>
+<div class="row">
+  <div class="col-md-10">
+    <h1>Articles</h1>    
+  </div>
+  <div class="col-md-2">
+    <h2>
+      <%= link_to 'New Article', new_article_path, class: "btn btn-primary" %>
+    </h2>
+  </div>
+</div>
+          
+  <% @articles.each do |article| %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= link_to article.title, article_path(article) %></h3>
+          </div>
+          <div class="panel-body">
+            <%= article.body %>
+          </div>
+          <div class="panel-body text-right">
+            Published at: <%= article.publish_at %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Body</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @articles.each do |article| %>
-      <tr>
-        <td><%= link_to article.title, article_path(article) %></td>
-        <td><%= article.body %></td>
-        <td><%= article.publish_at %></td>
-        <td><%= link_to 'Show', article %></td>
-        <td><%= link_to 'Edit', edit_article_path(article) %></td>
-        <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Article', new_article_path %>
