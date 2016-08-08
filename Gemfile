@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'devise'
 
 group :development, :test do
 	gem 'rspec-rails', '~> 3.5'

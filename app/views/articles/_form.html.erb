@@ -1,4 +1,4 @@
-<%= form_for(article) do |f| %>
+<%= form_for(article, class: "form-horizontal", role: "form") do |f| %>
   <% if article.errors.any? %>
     <div id="error_explanation">
       <ul class="list-unstyled">
