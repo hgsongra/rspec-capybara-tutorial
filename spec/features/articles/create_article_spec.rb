@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.feature "Create article" do
+
+  before do
+    @hitesh = User.create!(email: 'hgsongra@gmail.com', password: 'Password')
+    login_as(@hitesh)
+	end
+
+
 	scenario 'user create article' do
 		visit "/"	  
 		click_link "New Article"
@@ -8,6 +15,7 @@ RSpec.feature "Create article" do
 		fill_in "Body", with: "Whatever it is"
 		click_button "Create Article"
 		expect(page).to have_content("Article was successfully created.")
+		expect(page).to have_content("Created by: #{@hitesh.email}")
 	end	
 
 	scenario 'validate article fields' do
