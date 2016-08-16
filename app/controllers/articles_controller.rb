@@ -20,6 +20,9 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1/edit
   def edit
+    unless @article.user == current_user
+      redirect_to root_path, alert: "You can edit only your own article"
+    end
   end
 
   # POST /articles
@@ -41,6 +44,9 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
+    unless @article.user == current_user
+      redirect_to root_path, alert: "You can edit only your own article"
+    end
     respond_to do |format|
       if @article.update(article_params)
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
