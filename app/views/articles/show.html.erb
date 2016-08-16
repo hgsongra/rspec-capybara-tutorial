@@ -12,7 +12,7 @@
       <div class="panel-body text-right">
         <strong>Published at:</strong> <%= @article.publish_at %>
         <span>&nbsp;</span>
-        <strong>Created by:</strong> <%= @article.user.email %>
+        <strong>Created by:</strong> <%= @article.user.email  if @article.user %>
       </div>
     </div>
   </div>
@@ -21,8 +21,10 @@
 <div class="row">
 	<div class="col-md-12">
     <%= link_to 'Back', articles_path, class: "btn btn-primary" %>
-		<%= link_to 'Edit', edit_article_path(@article), class: "btn btn-primary" %>
-    <%= link_to 'Delete', @article, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+    <% if @article.user == current_user%>
+		  <%= link_to 'Edit', edit_article_path(@article), class: "btn btn-primary" %>
+      <%= link_to 'Delete', @article, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+    <%end%>
 	</div>
 </div>
 

@@ -20,7 +20,8 @@
             <%= article.body %>
           </div>
           <div class="panel-body text-right">
-            Published at: <%= article.publish_at %>
+            <strong>Published at:</strong> <%= article.publish_at %>
+            <strong>Created by:</strong> <%= article.user.email if article.user%>
           </div>
         </div>
       </div>
