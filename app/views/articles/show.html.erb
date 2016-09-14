@@ -4,7 +4,7 @@
   <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title"><%= @article.title %></h3>
+          <h3 class="panel-title"><%= @article.title %></h3>      
       </div>
       <div class="panel-body">
         <%= @article.body %>
@@ -21,12 +21,58 @@
 <div class="row">
 	<div class="col-md-12">
     <%= link_to 'Back', articles_path, class: "btn btn-primary" %>
-    <% if @article.user == current_user%>
+    <% if user_signed_in? && @article.user == current_user%>
 		  <%= link_to 'Edit', edit_article_path(@article), class: "btn btn-primary" %>
       <%= link_to 'Delete', @article, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
     <%end%>
 	</div>
 </div>
 
+<div class="row">
+  <div class="col-md-12">
+    <%= form_for [@article, @comment], html: { class: "form-horizontal", role: "form"} do |f| %>
+      <% if @comment.errors.any? %>
+        <div id="error_explanation">
+          <ul class="list-unstyled">
+          <% @comment.errors.full_messages.each do |message| %>
+            <li class="alert alert-danger"><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
 
+      <div class="col-md-8">
+        <div class="form-group">
+          <%= f.label :body %>
+          <%= f.text_area :body, class: "form-control" %>
+        </div>  
+      </div>
 
+      <div class="col-md-4">
+        <div class="actions">
+          <%= f.submit('Add Comment',class: "btn btn-primary") %>
+        </div>  
+      </div>      
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <h1>Comments</h1>
+  <% if @article.comments.persisted.any?%>
+    <% @article.comments.persisted.each do |comment|%>
+      <div class="row">
+        <div class="col-md-12">
+          <p><strong><%= comment.user.email %></strong> <%= time_ago_in_words(comment.created_at) %> ago</p>
+          <p><%= comment.body%></p>
+        </div>
+      </div>
+        
+      <hr>
+    <%end%>
+  <%else%>
+    <div class="col-md-12 alert">
+      There are know comments to show.
+    </div>
+  <%end%>
+</div>
