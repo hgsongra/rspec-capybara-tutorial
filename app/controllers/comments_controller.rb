@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
         format.html { redirect_to @article, notice: 'Comment has been created' }
         format.json { render :show, status: :created, location: @article }
       else
+      	flash[:alert] = @comment.errors.full_messages.join(', ')
         format.html { redirect_to :back }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end

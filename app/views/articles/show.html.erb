@@ -31,15 +31,6 @@
 <div class="row">
   <div class="col-md-12">
     <%= form_for [@article, @comment], html: { class: "form-horizontal", role: "form"} do |f| %>
-      <% if @comment.errors.any? %>
-        <div id="error_explanation">
-          <ul class="list-unstyled">
-          <% @comment.errors.full_messages.each do |message| %>
-            <li class="alert alert-danger"><%= message %></li>
-          <% end %>
-          </ul>
-        </div>
-      <% end %>
 
       <div class="col-md-8">
         <div class="form-group">
