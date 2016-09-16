@@ -3,18 +3,18 @@ class CommentsController < ApplicationController
 	before_filter :set_article
 
 	def create
-		@comment = @article.comments.build(comment_params)
-		@comment.user = current_user
-		respond_to do |format|
-      if @comment.save
-        format.html { redirect_to @article, notice: 'Comment has been created' }
-        format.json { render :show, status: :created, location: @article }
-      else
-      	flash[:alert] = @comment.errors.full_messages.join(', ')
-        format.html { redirect_to :back }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
-    end
+		if current_user
+			@comment = @article.comments.build(comment_params)
+			@comment.user = current_user
+			if @comment.save
+	    	flash[:notice] = "Comment has been created"
+	    else
+	    	flash[:alert] = "Comment has not been created"
+	    end
+	    redirect_to article_path(@article)
+		else
+			redirect_to new_user_session_path
+		end		
 	end
 
 	private
